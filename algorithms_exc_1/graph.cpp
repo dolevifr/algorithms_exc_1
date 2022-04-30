@@ -30,15 +30,18 @@ bool Graph::isVertexInRange(size_t vertexList) const {
 
 void Graph::removeEdge(int u, int v) {
 	auto res = findVertex(u, v);
+	edgeList.erase(std::remove(edgeList.begin(), edgeList.end(), &res.getItem()->data), edgeList.end());
 
 	if (res != nullptr) {
 		vertexList[u - 1].remove(res.getItem());
 
 		auto res = findVertex(v, u);
 		vertexList[v - 1].remove(res.getItem());
+		edgeList.erase(std::remove(edgeList.begin(), edgeList.end(), &res.getItem()->data), edgeList.end());
 	}
 	else
 		throw std::out_of_range("edge to remove was not found in graph");
+
 }
 
 

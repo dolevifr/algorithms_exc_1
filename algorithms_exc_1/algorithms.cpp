@@ -1,6 +1,6 @@
 #include "algorithms.h"
 
-std::vector<Edge*> Kruskal(const Graph& weightedGraph) {
+int Kruskal(const Graph& weightedGraph) {
 	std::vector<Edge*> promisingSet;
 	size_t graphSize = weightedGraph.getSize();
 	Disjoint_Sets components(graphSize);
@@ -27,16 +27,16 @@ std::vector<Edge*> Kruskal(const Graph& weightedGraph) {
 	if (edgesCounter != graphSize - 1)
 		throw "no MST";
 
-	std::cout << "Kruskal " << weight;
-	return promisingSet;
+	return weight;
 }
 
 
-std::vector<vertexStatus*> Prim(const Graph& weightedGraph) {
+int Prim(const Graph& weightedGraph) {
 	size_t graphSize = weightedGraph.getSize();
 	std::vector<vertexStatus*> arr;
 	Weight_Queue queue;
 	int weight = 0;
+	int counter = 0;
 
 	for (int i = 1; i <= graphSize; i++)
 		arr.push_back(new vertexStatus(i));
@@ -57,11 +57,11 @@ std::vector<vertexStatus*> Prim(const Graph& weightedGraph) {
 				cur_vertex->parent = u->vertexLabel;
 				queue.decreaseKey(cur_vertex->queueInd, cur_vertex->min);
 			}
+			counter++;
 		}
 	}
 
-	std::cout << "Prim " << weight;
-	return arr;
+	return weight;
 }
 
 

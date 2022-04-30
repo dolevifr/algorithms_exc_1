@@ -78,20 +78,20 @@ void Linked_List<T>::append(const T& data) {
 
 
 template<typename T>
-void Linked_List<T>::remove(Node* node) {
-	Node* next = node->next;
-	Node* prev = node->prev;
+void Linked_List<T>::remove(Node* current) {
 
-	if (prev)
-		prev->next = next;
+	if (current->prev)
+		current->prev->next = current->next;
 	else
-		head = next;
+		head = current->next;
 
-	if (next)
-		next->prev = prev;
+	if (current->next)
+		current->next->prev = current->prev;
 	else
-		tail = prev;
+		tail = current->prev;  // Assuming that there's a tail, somewhere around here...
 
-	delete node;
+	current->next = nullptr;
+	current->prev = nullptr;
+	delete current;
 }
 #endif

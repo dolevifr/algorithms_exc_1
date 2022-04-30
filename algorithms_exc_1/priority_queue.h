@@ -49,7 +49,7 @@ void Priority_Queue<T>::fixUpwards(size_t index, int newKey) {
 	T item = arr[index];
 	updateKey(item, newKey);
 
-	while (i > 0 && compare(item, arr[parent(i)])) {
+	while (i > 0 && compare(arr[i], arr[parent(i)])) {
 		upkeep(arr[i], arr[parent(i)]);
 		arr[i] = arr[parent(i)];
 		i = parent(i);

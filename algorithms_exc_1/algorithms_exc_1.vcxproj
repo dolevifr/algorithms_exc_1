@@ -141,14 +141,14 @@
   <ItemGroup>
     <ClCompile Include="algorithms.cpp" />
     <ClCompile Include="disjoint_sets.cpp" />
-    <ClCompile Include="general.cpp" />
+    <ClCompile Include="utils.cpp" />
     <ClCompile Include="graph.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="algorithms.h" />
     <ClInclude Include="general.h" />
-    <ClInclude Include="general2.h" />
+    <ClInclude Include="utils.h" />
     <ClInclude Include="graph.h" />
     <ClInclude Include="linked_list.h" />
     <ClInclude Include="priority_queue.h" />

@@ -29,8 +29,8 @@ struct Weight_Queue : public Priority_Queue<vertexStatus*> {
 };
 
 
-std::vector<Edge*> Kruskal(const Graph& weightedGraph);
-std::vector<vertexStatus*> Prim(const Graph& weightedGraph);
+int Kruskal(const Graph& weightedGraph);
+int Prim(const Graph& weightedGraph);
 bool isConnected(const Graph& graph);
 void visit(const Graph& graph, std::vector<Color>& color, int vertexNum, int& counter);
 

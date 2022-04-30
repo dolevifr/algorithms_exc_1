@@ -21,9 +21,6 @@ struct Edge {
 };
 enum class Color { WHITE, GREY, BLACK };
 
-
-
-
 const int INF = std::numeric_limits<int>::max();
 const int DEFAULT_MAX_CONTAINER_SIZE = 100;
 #endif
