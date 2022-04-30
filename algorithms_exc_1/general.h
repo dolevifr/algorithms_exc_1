@@ -9,8 +9,11 @@
 #include <fstream>
 #include <string>
 #include <sstream>
-#include <filesystem>
 
+// testing
+#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
+#include <experimental/filesystem>
+namespace fs = std::experimental::filesystem;
 
 struct Edge {
 	int fromVertex;

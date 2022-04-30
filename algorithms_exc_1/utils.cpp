@@ -36,12 +36,10 @@ Graph makeGraphFromFile(const std::string& fileName, Edge& edge) {
 		}
 	}
 
-
-
 	return graph;
 }
 
-void temp(char* fileName) {
+void temp(std::string fileName) {
 	std::string str(fileName);
 	Edge edgeToRemove(0, 0, 0);
 	Graph graph = makeGraphFromFile(str, edgeToRemove);
@@ -62,16 +60,19 @@ void temp(char* fileName) {
 		std::cout << "Kruskal2: " << res << std::endl;
 	}
 	else
-		std::cout << "No MST";
+		std::cout << "No MST" << std::endl;
 }
 
 std::vector<std::string> getAllTextFilesInFolder() {
-	std::string path("/your/dir/");
-	std::string ext(".sample");
-	for (auto& p : std::filesystem::recursive_directory_iterator(path))
+	fs::path path = fs::current_path();
+	std::string ext(".txt");
+	std::vector<std::string> fileList;
+
+	for (auto& p : fs::recursive_directory_iterator(path))
 	{
 		if (p.path().extension() == ext)
-			std::cout << p.path().stem().string() << '\n';
+			fileList.push_back(p.path().stem().string() + ext);
 	}
 
+	return fileList;
 }

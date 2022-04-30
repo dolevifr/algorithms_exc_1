@@ -6,5 +6,5 @@
 
 Graph makeGraphFromFile(const std::string& fileName, Edge& edge);
 std::vector<std::string> getAllTextFilesInFolder();
-void temp(char* fileName);
+void temp(std::string fileName);
 #endif

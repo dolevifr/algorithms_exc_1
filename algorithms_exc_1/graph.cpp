@@ -11,7 +11,7 @@ bool Graph::isAdjacent(int u, int v) const {
 
 
 void Graph::addEdge(int u, int v, int c) {
-	if (!isVertexInRange(u))
+	if (!isVertexInRange(u) || !isVertexInRange(v))
 		throw std::out_of_range("vertex does not exist");
 
 	Edge edge1(u, v, c);
