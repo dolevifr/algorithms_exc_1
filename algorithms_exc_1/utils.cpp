@@ -64,3 +64,14 @@ void temp(char* fileName) {
 	else
 		std::cout << "No MST";
 }
+
+std::vector<std::string> getAllTextFilesInFolder() {
+	std::string path("/your/dir/");
+	std::string ext(".sample");
+	for (auto& p : std::filesystem::recursive_directory_iterator(path))
+	{
+		if (p.path().extension() == ext)
+			std::cout << p.path().stem().string() << '\n';
+	}
+
+}
