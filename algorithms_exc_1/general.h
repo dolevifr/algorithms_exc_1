@@ -23,6 +23,7 @@ struct Edge {
 	Edge(int from, int to, int weight) : fromVertex(from), toVertex(to), weight(weight) {};
 	inline bool operator>(const Edge& edge) { return this->weight > edge.weight;}
 };
+
 enum class Color { WHITE, GREY, BLACK };
 
 const int INF = std::numeric_limits<int>::max();

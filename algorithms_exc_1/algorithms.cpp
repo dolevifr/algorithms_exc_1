@@ -21,6 +21,9 @@ int Kruskal(const Graph& weightedGraph) {
 			weight += edge->weight;
 			promisingSet.push_back(edge);
 			components.Union(repU, repV);
+
+			//debug 
+//			std::cout << *edge << std::endl;
 		}
 	}
 	
@@ -36,7 +39,6 @@ int Prim(const Graph& weightedGraph) {
 	std::vector<vertexStatus*> arr;
 	Weight_Queue queue;
 	int weight = 0;
-	int counter = 0;
 
 	for (int i = 1; i <= graphSize; i++)
 		arr.push_back(new vertexStatus(i));
@@ -50,14 +52,13 @@ int Prim(const Graph& weightedGraph) {
 		weight += u->min;
 
 		for (auto& adjVertex : weightedGraph[u->vertexLabel]) {
-			vertexStatus* cur_vertex = arr[adjVertex.toVertex - 1];   // get current adjacent vertex status
+			vertexStatus* adjVertexStatus = arr[adjVertex.toVertex - 1];   // get current adjacent vertex status
 
-			if (!cur_vertex->isInTree && adjVertex.weight < cur_vertex->min) {
-				cur_vertex->min = adjVertex.weight;
-				cur_vertex->parent = u->vertexLabel;
-				queue.decreaseKey(cur_vertex->queueInd, cur_vertex->min);
+			if (!adjVertexStatus->isInTree && adjVertex.weight < adjVertexStatus->min) {
+				adjVertexStatus->min = adjVertex.weight;
+				adjVertexStatus->parent = u->vertexLabel;
+				queue.decreaseKey(adjVertexStatus->queueInd, adjVertexStatus->min);
 			}
-			counter++;
 		}
 	}
 
@@ -66,23 +67,22 @@ int Prim(const Graph& weightedGraph) {
 
 
 
-bool isConnected(const Graph& graph)
-{
+bool isConnected(const Graph& graph) {
 	std::vector<Color> colors;
 	int counter = 1; //first vertex isnt called by visit so starts from 1
 	int start = 1;
-	for (int i = 0; i <= graph.getSize(); i++)
-	{
+
+	for (int i = 0; i <= graph.getSize(); i++) {
 		colors.push_back(Color::WHITE) ;
 	}
+
 	visit(graph, colors, start, counter);
-	
 	return counter == graph.getSize();
 }
 
-void visit(const Graph& graph, std::vector<Color>& color, int vertexNum,int& counter)
-{
+void visit(const Graph& graph, std::vector<Color>& color, int vertexNum, int& counter) {
 	color[vertexNum] = Color::GREY;
+
 	for (auto& vert : graph[vertexNum])
 	{
 		if (color[vert.toVertex] == Color::WHITE)
@@ -92,5 +92,4 @@ void visit(const Graph& graph, std::vector<Color>& color, int vertexNum,int& cou
 		}
 	}
 	color[vertexNum] = Color::BLACK;
-
 }

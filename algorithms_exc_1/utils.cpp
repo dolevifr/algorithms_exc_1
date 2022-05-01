@@ -2,7 +2,6 @@
 #include "algorithms.h"
 
 Graph makeGraphFromFile(const std::string& fileName, Edge& edge) {
-
 	std::fstream file(fileName);
 	//TODO: add file check
 	std::string buffer;
@@ -39,15 +38,14 @@ Graph makeGraphFromFile(const std::string& fileName, Edge& edge) {
 	return graph;
 }
 
-void temp(std::string fileName) {
+void runAlgorithms(std::string fileName) {
 	std::string str(fileName);
 	Edge edgeToRemove(0, 0, 0);
 	Graph graph = makeGraphFromFile(str, edgeToRemove);
 
-	if (!isConnected(graph)) {
+	if (!isConnected(graph))
 		throw std::invalid_argument("No MST");
-	}
-
+	
 	int res = Kruskal(graph);
 	std::cout << "Kruskal: " << res << std::endl;
 	res = Prim(graph);
@@ -68,8 +66,7 @@ std::vector<std::string> getAllTextFilesInFolder() {
 	std::string ext(".txt");
 	std::vector<std::string> fileList;
 
-	for (auto& p : fs::recursive_directory_iterator(path))
-	{
+	for (auto& p : fs::recursive_directory_iterator(path)) {
 		if (p.path().extension() == ext)
 			fileList.push_back(p.path().stem().string() + ext);
 	}

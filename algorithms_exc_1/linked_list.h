@@ -55,6 +55,7 @@ public:
 	T& getTail() { return tail->data; };
 	T& getHead() { return head->data; };
 	void append(const T& data);
+	void append(Node* node);
 	void remove(Node* node);
 };
 
@@ -76,6 +77,18 @@ void Linked_List<T>::append(const T& data) {
 	}
 }
 
+
+template<typename T>
+void Linked_List<T>::append(Node* node) {
+	if (isEmpty())
+		head = tail = node;
+
+	else {
+		tail->next = node;
+		node->prev = tail;
+		tail = tail->next;
+	}
+}
 
 template<typename T>
 void Linked_List<T>::remove(Node* current) {

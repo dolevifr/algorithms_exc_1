@@ -46,16 +46,14 @@ template <typename T>
 void Priority_Queue<T>::fixUpwards(size_t index, int newKey) {
 	size_t i = index;
 
-	T item = arr[index];
-	updateKey(item, newKey);
+	T item = arr[i];
+	updateKey(arr[i], newKey);
 
 	while (i > 0 && compare(arr[i], arr[parent(i)])) {
 		upkeep(arr[i], arr[parent(i)]);
-		arr[i] = arr[parent(i)];
+		std::swap(arr[i], arr[parent(i)]);
 		i = parent(i);
 	};
-
-	arr[i] = item;
 }
 
 
