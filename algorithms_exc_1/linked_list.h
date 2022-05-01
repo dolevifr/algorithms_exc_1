@@ -1,6 +1,7 @@
 #ifndef _LINKED_LIST_H_
 #define _LINKED_LIST_H_
 #include "general.h"
+#include "graph.h"
 
 // linked list class, with iterator
 template<typename T>
@@ -13,6 +14,7 @@ private:
 
 		Node(const T& data) : data(data), next(nullptr), prev(nullptr) {};
 		~Node() { delete next; };
+		friend class graph;
 	};
 
 	Node* head;

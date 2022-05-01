@@ -2,7 +2,7 @@
 
 bool Graph::isAdjacent(int u, int v) const {
 	if (!isVertexInRange(u))
-		throw std::out_of_range("vertex does not exist");
+		throw std::out_of_range("invalid input");
 
 	auto res = findVertex(u, v);
 
@@ -12,7 +12,7 @@ bool Graph::isAdjacent(int u, int v) const {
 
 void Graph::addEdge(int u, int v, int c) {
 	if (!isVertexInRange(u) || !isVertexInRange(v))
-		throw std::out_of_range("vertex does not exist");
+		throw std::out_of_range("invalid input");
 
 	Edge edge1(u, v, c);
 	Edge edge2(v, u, c);
@@ -31,7 +31,7 @@ bool Graph::isVertexInRange(size_t vertexList) const {
 void Graph::removeEdge(int u, int v) {
 	auto res = findVertex(u, v);
 	edgeList.erase(std::remove(edgeList.begin(), edgeList.end(), &res.getItem()->data), edgeList.end());
-
+	
 	if (res != nullptr) {
 		vertexList[u - 1].remove(res.getItem());
 
@@ -40,7 +40,7 @@ void Graph::removeEdge(int u, int v) {
 		edgeList.erase(std::remove(edgeList.begin(), edgeList.end(), &res.getItem()->data), edgeList.end());
 	}
 	else
-		throw std::out_of_range("edge to remove was not found in graph");
+		throw std::out_of_range("invalid input");
 
 }
 

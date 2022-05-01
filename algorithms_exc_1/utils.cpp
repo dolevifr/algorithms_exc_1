@@ -3,11 +3,13 @@
 
 Graph makeGraphFromFile(const std::string& fileName, Edge& edge) {
 	std::fstream file(fileName);
-	//TODO: add file check
 	std::string buffer;
 	int numOfVertexes;
 	int numOfEdges;
 
+	if (file.fail())
+		throw std::runtime_error("invalid input");
+	
 	std::getline(file, buffer);
 	numOfVertexes = std::stoi(buffer);
 	std::getline(file, buffer);
@@ -23,7 +25,7 @@ Graph makeGraphFromFile(const std::string& fileName, Edge& edge) {
 		graph.addEdge(to, from, weight);
 		
 		if (file.eof()) 
-			throw std::runtime_error("too few edges given");
+			throw std::runtime_error("invalid input");
 	}
 	
 	if (std::getline(file, buffer)) {
@@ -31,7 +33,7 @@ Graph makeGraphFromFile(const std::string& fileName, Edge& edge) {
 		iss >> edge.fromVertex >> edge.toVertex;
 
 		if (!iss.eof()) {
-			throw std::runtime_error("too many edges given");
+			throw std::runtime_error("invalid input");
 		}
 	}
 
@@ -44,18 +46,18 @@ void runAlgorithms(std::string fileName) {
 	Graph graph = makeGraphFromFile(str, edgeToRemove);
 
 	if (!isConnected(graph))
-		throw std::invalid_argument("No MST");
+		throw std::invalid_argument("invalid input");
 	
 	int res = Kruskal(graph);
-	std::cout << "Kruskal: " << res << std::endl;
+	std::cout << "Kruskal: <" << res << ">" << std::endl;
 	res = Prim(graph);
-	std::cout << "Prim: " << res << std::endl;
+	std::cout << "Prim: <" << res << ">" << std::endl;
 
 	graph.removeEdge(edgeToRemove.fromVertex, edgeToRemove.toVertex);
 
 	if (isConnected(graph)) {
 		res = Kruskal(graph);
-		std::cout << "Kruskal2: " << res << std::endl;
+		std::cout << "Kruskal2: <" << res << ">" << std::endl;
 	}
 	else
 		std::cout << "No MST" << std::endl;
@@ -72,4 +74,21 @@ std::vector<std::string> getAllTextFilesInFolder() {
 	}
 
 	return fileList;
+}
+
+void runTests() {
+	auto fileList = getAllTextFilesInFolder();
+	for (auto& file : fileList) {
+		std::cout << "Test Name: " << file << std::endl;
+
+		try {
+			runAlgorithms(file);
+		}
+		catch (std::exception excp) {
+			std::cout << excp.what() << std::endl;
+			exit(1);
+		}
+
+		std::cout << "-----------------------" << std::endl;
+	}
 }

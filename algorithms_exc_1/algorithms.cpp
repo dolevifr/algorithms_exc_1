@@ -21,9 +21,6 @@ int Kruskal(const Graph& weightedGraph) {
 			weight += edge->weight;
 			promisingSet.push_back(edge);
 			components.Union(repU, repV);
-
-			//debug 
-//			std::cout << *edge << std::endl;
 		}
 	}
 	
