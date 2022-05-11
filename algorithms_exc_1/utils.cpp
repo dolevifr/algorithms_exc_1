@@ -1,7 +1,7 @@
 #include "utils.h"
 #include "algorithms.h"
 
-Graph makeGraphFromFile(const std::string& fileName, Edge& edge) {
+Graph* makeGraphFromFile(const std::string& fileName, Edge& edge) {
 	std::fstream file(fileName);
 	std::string buffer;
 	int numOfVertexes;
@@ -15,14 +15,17 @@ Graph makeGraphFromFile(const std::string& fileName, Edge& edge) {
 	std::getline(file, buffer);
 	numOfEdges = std::stoi(buffer);
 
-	Graph graph(numOfVertexes);
+	Graph* graph = new Graph(numOfVertexes);
 	int to, from, weight;
 
 	for (int i = 0; i < numOfEdges; i++) {
 		std::getline(file, buffer);
 		std::istringstream iss(buffer);
-		iss >> to >> from >> weight;
-		graph.addEdge(to, from, weight);
+		
+		if (!(iss >> to >> from >> weight))
+			throw std::runtime_error("invalid input");
+
+		(*graph).addEdge(to, from, weight);
 		
 		if (file.eof()) 
 			throw std::runtime_error("invalid input");
@@ -40,28 +43,37 @@ Graph makeGraphFromFile(const std::string& fileName, Edge& edge) {
 	return graph;
 }
 
-void runAlgorithms(std::string fileName) {
-	std::string str(fileName);
+void runAlgorithms(std::string inputFile, std::ofstream& outputFile) {
+	std::string str(inputFile);
 	Edge edgeToRemove(0, 0, 0);
-	Graph graph = makeGraphFromFile(str, edgeToRemove);
+	Graph* graph = makeGraphFromFile(str, edgeToRemove);
 
-	if (!isConnected(graph))
-		throw std::invalid_argument("invalid input");
+	if (!isConnected(*graph))
+		throw std::runtime_error("invalid input");
 	
-	int res = Kruskal(graph);
+	int res = Kruskal(*graph);
 	std::cout << "Kruskal: <" << res << ">" << std::endl;
-	res = Prim(graph);
+	outputFile << "Kruskal: <" << res << ">" << std::endl;
+
+	res = Prim(*graph);
 	std::cout << "Prim: <" << res << ">" << std::endl;
+	outputFile << "Prim: <" << res << ">" << std::endl;
 
-	graph.removeEdge(edgeToRemove.fromVertex, edgeToRemove.toVertex);
+	(*graph).removeEdge(edgeToRemove.fromVertex, edgeToRemove.toVertex);
 
-	if (isConnected(graph)) {
-		res = Kruskal(graph);
+	if (isConnected(*graph)) {
+		res = Kruskal(*graph);
 		std::cout << "Kruskal2: <" << res << ">" << std::endl;
+		outputFile << "Kruskal2: <" << res << ">" << std::endl;
 	}
-	else
-		std::cout << "No MST" << std::endl;
+	else {
+		std::cout << "Kruskal2: No MST" << std::endl;
+		outputFile << "Kruskal2: <" << res << ">" << std::endl;
+	}
+
+	delete graph;
 }
+
 
 std::vector<std::string> getAllTextFilesInFolder() {
 	fs::path path = fs::current_path();
@@ -76,19 +88,28 @@ std::vector<std::string> getAllTextFilesInFolder() {
 	return fileList;
 }
 
-void runTests() {
+void runTests(std::ofstream& outputFile) {
 	auto fileList = getAllTextFilesInFolder();
 	for (auto& file : fileList) {
 		std::cout << "Test Name: " << file << std::endl;
+		outputFile << "Test Name: " << file << std::endl;
 
 		try {
-			runAlgorithms(file);
+			runAlgorithms(file, outputFile);
 		}
 		catch (std::exception excp) {
 			std::cout << excp.what() << std::endl;
-			exit(1);
+			outputFile << excp.what() << std::endl;
 		}
 
-		std::cout << "-----------------------" << std::endl;
+		std::cout << "---------------------------------------------" << std::endl;
+		outputFile << "---------------------------------------------" << std::endl;
 	}
+}
+
+const std::string& isDigits(const std::string& str) {
+	if (std::all_of(str.begin(), str.end(), ::isdigit))
+		return str;
+	else
+		throw std::invalid_argument("invalid input");
 }

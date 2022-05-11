@@ -50,10 +50,10 @@
     <ClInclude Include="algorithms.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="quick_sort.h">
+    <ClInclude Include="utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="utils.h">
+    <ClInclude Include="quick_sort.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -41,7 +41,6 @@ public:
 };
 
 
-//TODO: check if new key is fixing upwards
 template <typename T>
 void Priority_Queue<T>::fixUpwards(size_t index, int newKey) {
 	size_t i = index;

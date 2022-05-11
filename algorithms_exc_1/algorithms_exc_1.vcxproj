@@ -148,12 +148,12 @@
   <ItemGroup>
     <ClInclude Include="algorithms.h" />
     <ClInclude Include="general.h" />
+    <ClInclude Include="quick_sort.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="graph.h" />
     <ClInclude Include="linked_list.h" />
     <ClInclude Include="priority_queue.h" />
     <ClInclude Include="disjoint_sets.h" />
-    <ClInclude Include="quick_sort.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

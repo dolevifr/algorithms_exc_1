@@ -103,7 +103,7 @@ void Linked_List<T>::remove(Node* current) {
 	if (current->next)
 		current->next->prev = current->prev;
 	else
-		tail = current->prev;  // Assuming that there's a tail, somewhere around here...
+		tail = current->prev;
 
 	current->next = nullptr;
 	current->prev = nullptr;

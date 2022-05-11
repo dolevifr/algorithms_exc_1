@@ -28,7 +28,6 @@ struct Weight_Queue : public Priority_Queue<vertexStatus*> {
 	void decreaseKey(int index, int newKey) { return Priority_Queue::fixUpwards(index, newKey); };
 };
 
-
 int Kruskal(const Graph& weightedGraph);
 int Prim(const Graph& weightedGraph);
 bool isConnected(const Graph& graph);

@@ -23,6 +23,7 @@ public:
 	bool isAdjacent(int u, int v) const;
 	void addEdge(int u, int v, int c);
 	void removeEdge(int u, int v);
+	void clear() { delete vertexList; size = 0; };
 
 	Vertex& operator[](int i) const { return vertexList[i - 1]; };
 };

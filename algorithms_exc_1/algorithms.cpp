@@ -59,9 +59,12 @@ int Prim(const Graph& weightedGraph) {
 		}
 	}
 
+	for (auto& vert : arr)
+		delete vert;
+
+	arr.clear();
 	return weight;
 }
-
 
 
 bool isConnected(const Graph& graph) {
@@ -80,10 +83,8 @@ bool isConnected(const Graph& graph) {
 void visit(const Graph& graph, std::vector<Color>& color, int vertexNum, int& counter) {
 	color[vertexNum] = Color::GREY;
 
-	for (auto& vert : graph[vertexNum])
-	{
-		if (color[vert.toVertex] == Color::WHITE)
-		{
+	for (auto& vert : graph[vertexNum]) {
+		if (color[vert.toVertex] == Color::WHITE) {
 			counter++;
 			visit(graph, color, vert.toVertex,counter);
 		}
