@@ -1,6 +1,7 @@
 #include "utils.h"
 #include "algorithms.h"
 
+// creates a graph from a given text file and raises exceptions if invalid format 
 Graph* makeGraphFromFile(const std::string& fileName, Edge& edge) {
 	std::fstream file(fileName);
 	std::string buffer;
@@ -43,6 +44,7 @@ Graph* makeGraphFromFile(const std::string& fileName, Edge& edge) {
 	return graph;
 }
 
+// runs all algorithms in the format specified, one by one
 void runAlgorithms(std::string inputFile, std::ofstream& outputFile) {
 	std::string str(inputFile);
 	Edge edgeToRemove(0, 0, 0);
@@ -74,7 +76,7 @@ void runAlgorithms(std::string inputFile, std::ofstream& outputFile) {
 	delete graph;
 }
 
-
+// returns list of all txt files in directory, for testing
 std::vector<std::string> getAllTextFilesInFolder() {
 	fs::path path = fs::current_path();
 	std::string ext(".txt");
@@ -88,6 +90,7 @@ std::vector<std::string> getAllTextFilesInFolder() {
 	return fileList;
 }
 
+// used for testing, runs the algorithms on all txt files in root directory
 void runTests(std::ofstream& outputFile) {
 	auto fileList = getAllTextFilesInFolder();
 	for (auto& file : fileList) {
@@ -105,11 +108,4 @@ void runTests(std::ofstream& outputFile) {
 		std::cout << "---------------------------------------------" << std::endl;
 		outputFile << "---------------------------------------------" << std::endl;
 	}
-}
-
-const std::string& isDigits(const std::string& str) {
-	if (std::all_of(str.begin(), str.end(), ::isdigit))
-		return str;
-	else
-		throw std::invalid_argument("invalid input");
 }

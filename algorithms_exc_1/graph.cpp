@@ -1,5 +1,6 @@
 #include "graph.h"
 
+// checks if an edge exists between vertex u and v
 bool Graph::isAdjacent(int u, int v) const {
 	if (!isVertexInRange(u))
 		throw std::out_of_range("invalid input");
@@ -22,9 +23,9 @@ void Graph::addEdge(int u, int v, int c) {
 }
 
 
-
-bool Graph::isVertexInRange(size_t vertexList) const {
-	return size >= vertexList;
+// checks if a given vertex exists in graph
+bool Graph::isVertexInRange(size_t vertex) const {
+	return size >= vertex;
 }
 
 
@@ -44,7 +45,7 @@ void Graph::removeEdge(int u, int v) {
 
 }
 
-
+// returns iterator of vertex if found in graph
 Vertex::Iterator Graph::findVertex(int u, int v) const {
 	auto matchData = [&v](const Edge& edge) { return edge.toVertex == v; };
 	auto res = std::find_if(vertexList[u - 1].begin(), vertexList[u - 1].end(), matchData);

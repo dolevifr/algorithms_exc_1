@@ -1,3 +1,0 @@
-Kruskal: <19>
-Prim: <19>
-Kruskal2: <21>

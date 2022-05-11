@@ -7,6 +7,7 @@
 #include "priority_queue.h"
 #include "quick_sort.h"
 
+// a container for all fields of vertex required in Prim algorithm 
 struct vertexStatus {
 	bool	isInTree = false;
 	int		min = INF;
@@ -17,6 +18,7 @@ struct vertexStatus {
 	vertexStatus(int i) : vertexLabel(i), queueInd(i - 1) { };
 };
 
+// a specific type of priority queue for weights, with custom functions
 struct Weight_Queue : public Priority_Queue<vertexStatus*> {
 	Weight_Queue() : Priority_Queue(
 		[](const vertexStatus* ver1, const vertexStatus* ver2) { return ver1->min < ver2->min; },
@@ -31,6 +33,6 @@ struct Weight_Queue : public Priority_Queue<vertexStatus*> {
 int Kruskal(const Graph& weightedGraph);
 int Prim(const Graph& weightedGraph);
 bool isConnected(const Graph& graph);
-void visit(const Graph& graph, std::vector<Color>& color, int vertexNum, int& counter);
+void visit(const Graph& graph, std::vector<DFS_Color>& color, int vertexNum, int& counter);
 
 #endif

@@ -2,8 +2,9 @@
 #define _GRAPH_H_
 #include "linked_list.h"
 
-// a simple directed graph class
+// a simple non-directed graph class
 class Graph {
+
 private:
 	std::vector<Edge*>	edgeList;
 	Vertex*				vertexList;

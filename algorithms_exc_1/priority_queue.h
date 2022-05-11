@@ -40,7 +40,7 @@ public:
 	T deleteRoot();
 };
 
-
+// bubbles node at index given upwards
 template <typename T>
 void Priority_Queue<T>::fixUpwards(size_t index, int newKey) {
 	size_t i = index;
@@ -77,7 +77,7 @@ void Priority_Queue<T>::fixHeap(size_t node) {
 	}
 }
 
-
+// deletes node at specified index
 template <typename T>
 T Priority_Queue<T>::remove(size_t node) {
 	if (isEmpty())
@@ -106,7 +106,7 @@ bool Priority_Queue<T>::isEmpty() const {
 	return arrSize == 0;
 };
 
-
+// creates a priority queue for a vector 
 template <typename T>
 void Priority_Queue<T>::build(std::vector<T> toBuild) {
 	if (!isEmpty())

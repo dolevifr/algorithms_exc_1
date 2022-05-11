@@ -66,28 +66,31 @@ int Prim(const Graph& weightedGraph) {
 	return weight;
 }
 
-
+// checks wether a given graph is connected
 bool isConnected(const Graph& graph) {
-	std::vector<Color> colors;
+	std::vector<DFS_Color> colors;
 	int counter = 1; //first vertex isnt called by visit so starts from 1
 	int start = 1;
 
+	// sets all vertexes colors to white
 	for (int i = 0; i <= graph.getSize(); i++) {
-		colors.push_back(Color::WHITE) ;
+		colors.push_back(DFS_Color::WHITE) ;
 	}
 
-	visit(graph, colors, start, counter);
+	// visit an arbitrary vertex, counter for the num of vertexes visited, to decide if graph is connected
+	visit(graph, colors, start, counter);  
 	return counter == graph.getSize();
 }
 
-void visit(const Graph& graph, std::vector<Color>& color, int vertexNum, int& counter) {
-	color[vertexNum] = Color::GREY;
+// a DFS visit function
+void visit(const Graph& graph, std::vector<DFS_Color>& color, int vertexNum, int& counter) {
+	color[vertexNum] = DFS_Color::GREY;
 
 	for (auto& vert : graph[vertexNum]) {
-		if (color[vert.toVertex] == Color::WHITE) {
+		if (color[vert.toVertex] == DFS_Color::WHITE) {
 			counter++;
 			visit(graph, color, vert.toVertex,counter);
 		}
 	}
-	color[vertexNum] = Color::BLACK;
+	color[vertexNum] = DFS_Color::BLACK;
 }

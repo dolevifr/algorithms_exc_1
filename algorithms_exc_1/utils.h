@@ -7,8 +7,6 @@
 Graph* makeGraphFromFile(const std::string& fileName, Edge& edge);
 std::vector<std::string> getAllTextFilesInFolder();
 
-const std::string& isDigits(const std::string& str);
-
 void runAlgorithms(std::string inputFile, std::ofstream& outputFile);
 void runTests(std::ofstream& outputFile);
 #endif

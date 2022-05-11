@@ -11,11 +11,12 @@
 #include <sstream>
 
 
-// testing
+// for testing
 #define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 #include <experimental/filesystem>
 namespace fs = std::experimental::filesystem;
 
+// struct that repressents an edge in graph
 struct Edge {
 	int fromVertex;
 	int toVertex;
@@ -25,7 +26,8 @@ struct Edge {
 	inline bool operator>(const Edge& edge) { return this->weight > edge.weight;}
 };
 
-enum class Color { WHITE, GREY, BLACK };
+// enum class of colors used to color edges in DFS 
+enum class DFS_Color { WHITE, GREY, BLACK };
 
 const int INF = std::numeric_limits<int>::max();
 const int DEFAULT_MAX_CONTAINER_SIZE = 100;

@@ -2,6 +2,7 @@
 #define _QUICK_SORT_H_
 #include "general.h"
 
+// a generic class for quick sort, a custom compare function for T must be provided
 template<typename T>
 class Quick_Sort {
 private:
@@ -40,7 +41,7 @@ public:
 	}
 };
 
-
+// specific instance of quick sort for sorting pointers of Edge
 struct Edge_Quick_Sort : public Quick_Sort<Edge*> {
 	Edge_Quick_Sort() : Quick_Sort(
 		[](const Edge* edge1, const Edge* edge2) { return edge1->weight < edge2->weight; })
